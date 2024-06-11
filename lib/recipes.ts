@@ -3,7 +3,6 @@ import prisma from "./prisma";
 export async function getRecipes() {
     try {
         const recipes = await prisma.recipe.findMany()
-        console.log({ recipes });
         return recipes;
     } catch (error) {
         console.error("getRecipes error:", error);

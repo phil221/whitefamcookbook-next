@@ -7,18 +7,16 @@ export default async function RecipesList() {
   
   return (
     <ul className="pl-2">
-      <li>
-        <Link href="/recipes/cheese">Cheese</Link>
-      </li>
-      <li>
-        <Link href="/recipes/food">Food</Link>
-      </li>
-      <li>
-        <Link href="/recipes/bread">Bread</Link>
-      </li>
-      <li>
-        <Link href="/recipes/onions">Onions</Link>
-      </li>
+      {
+        recipes.map(r => {
+          const recipePath = r.name?.split(" ").join("-").toLowerCase();
+          return (
+          <li key={r.recipeid}>
+            <Link href={`/recipes/${recipePath}`}>{r.name}</Link>
+          </li>
+        )
+      })
+      }
     </ul>
   );
 }

@@ -1,7 +1,10 @@
 import Link from "next/link";
 import React from "react";
+import { getRecipes } from "../../lib/recipes";
 
-export default function RecipesList() {
+export default async function RecipesList() {
+  const recipes = await getRecipes();
+  
   return (
     <ul className="pl-2">
       <li>

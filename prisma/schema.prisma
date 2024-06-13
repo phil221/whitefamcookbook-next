@@ -8,7 +8,8 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model recipe {
+model recipes {
+  recipeid       Int     @id @default(autoincrement())
   name           String? @db.VarChar(80)
   author         String? @db.VarChar(50)
   servingsnumber String? @db.VarChar(30)
@@ -18,5 +19,5 @@ model recipe {
   comment        String? @db.VarChar(500)
   nutritionfacts String? @db.VarChar(500)
   category       String? @db.VarChar(100)
-  recipeid       Int     @id
+  createdAt DateTime @default(now())
 }

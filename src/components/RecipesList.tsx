@@ -8,7 +8,7 @@ export default async function RecipesList() {
   return (
     <ul className="pl-2">
       {
-        recipes.map(r => {
+        recipes?.map(r => {
           const recipePath = r.name?.split(" ").join("-").toLowerCase();
           return (
           <li key={r.recipeid}>

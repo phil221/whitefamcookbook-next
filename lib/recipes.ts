@@ -6,20 +6,19 @@ export async function getRecipes() {
         return recipes;
     } catch (error) {
         console.error("getRecipes error:", error);
-        return [];
     }
 }
 
-export async function getRecipe(recipeid: number) {
+export async function getRecipe(recipeid: string) {
+    const idNumber = parseFloat(recipeid);
     try {
         const recipe = await prisma.recipes.findUnique({
-            where: { recipeid }
+            where: { recipeid: idNumber }
         })
         return recipe;
     } catch (error) {
         console.error("getRecipe error:", error);
-        return [];
     }
 }
 
-export type Recipe = Awaited<ReturnType<typeof getRecipes>>[0];
+export type Recipe = Awaited<ReturnType<typeof getRecipe>>;

@@ -12,7 +12,7 @@ export default async function RecipesList() {
           const recipePath = r.name?.split(" ").join("-").toLowerCase();
           return (
           <li key={r.recipeid}>
-            <Link href={`/recipes/${recipePath}`}>{r.name}</Link>
+            <Link href={`/recipes/${r.recipeid}/${recipePath}`}>{r.name}</Link>
           </li>
         )
       })

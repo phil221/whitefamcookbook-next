@@ -12,8 +12,8 @@ model Recipe {
   id       Int     @id @default(autoincrement())
   name           String @db.VarChar(80)
   authorName         String @db.VarChar(50)
-  authorId         String @db.VarChar(50)
-  author         Author @relation(fields: [authorName], references: [id])
+  authorId         Int
+  author         Author @relation(fields: [authorId], references: [id])
   servingsNumber String @db.VarChar(30)
   prepTime       Int
   ingredients    String @db.VarChar(500)
@@ -21,7 +21,8 @@ model Recipe {
   comment        String @db.VarChar(500)
   nutritionFacts String @db.VarChar(500)
   categoryName       String @db.VarChar(100)
-  category      Category @relation(fields: [categoryName], references: [name])
+  categoryId       Int
+  category      Category @relation(fields: [categoryId], references: [id])
   createdAt DateTime @default(now())
 }
 

@@ -8,16 +8,31 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model recipes {
-  recipeid       Int     @id @default(autoincrement())
-  name           String? @db.VarChar(80)
-  author         String? @db.VarChar(50)
-  servingsnumber String? @db.VarChar(30)
-  preptime       Int?
-  ingredients    String? @db.VarChar(500)
-  instructions   String? @db.VarChar(500)
-  comment        String? @db.VarChar(500)
-  nutritionfacts String? @db.VarChar(500)
-  category       String? @db.VarChar(100)
+model Recipe {
+  id       Int     @id @default(autoincrement())
+  name           String @db.VarChar(80)
+  authorName         String @db.VarChar(50)
+  authorId         String @db.VarChar(50)
+  author         Author @relation(fields: [authorName], references: [id])
+  servingsNumber String @db.VarChar(30)
+  prepTime       Int
+  ingredients    String @db.VarChar(500)
+  instructions   String @db.VarChar(500)
+  comment        String @db.VarChar(500)
+  nutritionFacts String @db.VarChar(500)
+  categoryName       String @db.VarChar(100)
+  category      Category @relation(fields: [categoryName], references: [name])
   createdAt DateTime @default(now())
+}
+
+model Author {
+  id       Int     @id @default(autoincrement())
+  name    String @db.VarChar(100)
+  recipes       Recipe[]
+}
+
+model Category {
+  id       Int     @id @default(autoincrement())
+  name     String  @db.VarChar(100)
+  recipes  Recipe[]
 }

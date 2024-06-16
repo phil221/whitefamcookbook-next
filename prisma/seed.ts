@@ -3,17 +3,17 @@ const prisma = new PrismaClient();
 async function main() {
   const authorExample = await prisma.author.create({
     data: {
-      name: "Cathy White",
+      name: "Molly Smillie",
     },
   });
   const recipeExample = await prisma.recipe.create({
     data: {
-      name: "Pasta Guglielmo",
-      authorName: "Cathy White",
-      servingsNumber: "10",
-      prepTime: 8,
-      ingredients: "1 tsp vanilla extract",
-      instructions: "1. Cook pasta",
+      name: "Shrimp Scampi",
+      authorName: "Molly Smillie",
+      servingsNumber: "8",
+      prepTime: 20,
+      ingredients: "20 lbs fettucine",
+      instructions: "1. Buy the fettucine",
       nutritionFacts: "Per serving:",
       category: "Entrees",
     },

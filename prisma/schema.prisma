@@ -9,31 +9,23 @@ datasource db {
 }
 
 model Recipe {
-  id       Int     @id @default(autoincrement())
-  name           String @db.VarChar(80)
-  authorName         String @db.VarChar(50)
-  authorId         Int
-  author         Author @relation(fields: [authorId], references: [id])
-  servingsNumber String @db.VarChar(30)
+  id             Int      @id @default(autoincrement())
+  name           String   @db.VarChar(80)
+  authorName     String   @db.VarChar(50)
+  authorId       Int
+  author         Author   @relation(fields: [authorId], references: [id])
+  servingsNumber String   @db.VarChar(30)
   prepTime       Int
-  ingredients    String @db.VarChar(500)
-  instructions   String @db.VarChar(500)
-  comment        String @db.VarChar(500)
-  nutritionFacts String @db.VarChar(500)
-  categoryName       String @db.VarChar(100)
-  categoryId       Int
-  category      Category @relation(fields: [categoryId], references: [id])
-  createdAt DateTime @default(now())
+  ingredients    String   @db.VarChar(500)
+  instructions   String   @db.VarChar(500)
+  comment        String?   @db.VarChar(500)
+  nutritionFacts String   @db.VarChar(500)
+  category       String
+  createdAt      DateTime @default(now())
 }
 
 model Author {
-  id       Int     @id @default(autoincrement())
-  name    String @db.VarChar(100)
-  recipes       Recipe[]
-}
-
-model Category {
-  id       Int     @id @default(autoincrement())
-  name     String  @db.VarChar(100)
-  recipes  Recipe[]
+  id      Int      @id @default(autoincrement())
+  name    String   @db.VarChar(100)
+  recipes Recipe[]
 }

@@ -9,11 +9,11 @@ export async function getRecipes() {
     }
 }
 
-export async function getRecipe(recipeid: string) {
-    const idNumber = parseFloat(recipeid);
+export async function getRecipe(recipeId: string) {
+    const id = parseFloat(recipeId);
     try {
         const recipe = await prisma.recipe.findUnique({
-            where: { recipeid: idNumber }
+            where: { id }
         })
         return recipe;
     } catch (error) {

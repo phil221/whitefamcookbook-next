@@ -3,7 +3,7 @@ import React from "react";
 import { getRecipes } from "../../lib/recipes";
 
 export default async function RecipesList() {
-  const recipes = await getRecipes();
+  const recipes = await getRecipes() || [];
   
   return (
     <ul className="pl-2">
@@ -11,8 +11,8 @@ export default async function RecipesList() {
         recipes?.map(r => {
           const recipePath = r.name?.split(" ").join("-").toLowerCase();
           return (
-          <li key={r.recipeid}>
-            <Link href={`/recipes/${r.recipeid}/${recipePath}`}>{r.name}</Link>
+          <li key={r.id}>
+            <Link href={`/recipes/${r.id}/${recipePath}`}>{r.name}</Link>
           </li>
         )
       })

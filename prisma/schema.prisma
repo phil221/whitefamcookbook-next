@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -12,19 +13,19 @@ model Recipe {
   id             Int      @id @default(autoincrement())
   name           String   @db.VarChar(80)
   authorName     String   @db.VarChar(50)
-  author         Author   @relation(fields: [authorName], references: [name])
   servingsNumber String   @db.VarChar(30)
   prepTime       Int
   ingredients    String   @db.VarChar(500)
   instructions   String   @db.VarChar(500)
-  comment        String?   @db.VarChar(500)
+  comment        String?  @db.VarChar(500)
   nutritionFacts String   @db.VarChar(500)
-  category       String
   createdAt      DateTime @default(now())
+  category       String
+  author         Author   @relation(fields: [authorName], references: [name])
 }
 
 model Author {
   id      Int      @id @default(autoincrement())
-  name    String   @db.VarChar(100) @unique
+  name    String   @unique @db.VarChar(100)
   recipes Recipe[]
 }

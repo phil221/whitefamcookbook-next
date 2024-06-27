@@ -15,6 +15,7 @@ export async function getRecipe(recipeId: string) {
     const recipe = await prisma.recipe.findUnique({
       where: { id },
     });
+    console.log(recipe)
     return recipe;
   } catch (error) {
     console.error("getRecipe error:", error);

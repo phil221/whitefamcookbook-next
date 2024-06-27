@@ -14,7 +14,7 @@ export default async function Author({ params }: Props) {
   const author = await getAuthor(authorName || "");
 
   return (
-    <div className="p-14">
+    <div>
       <h1 className="text-xl">{author?.name}</h1>
       <ul>
         {author?.recipes.map((recipe) => {

@@ -29,7 +29,7 @@ export default async function Recipe({ params }: Props) {
   const authorPath = composePathFromString(recipe?.authorName || "");
   const categoryPath = composePathFromString(recipe?.category.name || "");
   return (
-    <div className="p-14">
+    <div>
       <h1 className="text-xl">{recipe?.name}</h1>
       <div className="flex gap-10">
       <p>

@@ -1,5 +1,6 @@
 export const composePathFromString = (str: string) => {
-  return str.toLowerCase().split(" ").join("-");
+  const strArray = str.toLowerCase().split(" ");
+  return strArray.length > 1 ? strArray.join("-") : strArray[0];
 };
 
 export const composeNameFromPath = (path: string) => {

@@ -29,7 +29,7 @@ export default async function Category({ params }: Props) {
   const category = await getCategory(name);
 
   return (
-    <div className="p-14">
+    <div>
       <h1 className="text-xl">{category?.name}</h1>
       <p>{JSON.stringify(category)}</p>
       <p>...</p>

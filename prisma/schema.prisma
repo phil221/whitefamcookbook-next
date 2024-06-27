@@ -11,7 +11,8 @@ datasource db {
 model Recipe {
   id             Int      @id @default(autoincrement())
   name           String   @db.VarChar(80)
-  authorName     String   @db.VarChar(50)
+  authorName     String   @db.VarChar(100)
+  categoryName   String   @db.VarChar(100)
   servingsNumber String   @db.VarChar(30)
   prepTime       Int
   ingredients    String   @db.VarChar(500)
@@ -19,12 +20,20 @@ model Recipe {
   comment        String?  @db.VarChar(500)
   nutritionFacts String   @db.VarChar(500)
   createdAt      DateTime @default(now())
-  category       String
+  category       Category @relation(fields: [categoryName], references: [name])
   author         Author   @relation(fields: [authorName], references: [name])
 }
 
 model Author {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique @db.VarChar(100)
+  recipes    Recipe[]
+  categories Category[]
+}
+
+model Category {
   id      Int      @id @default(autoincrement())
   name    String   @unique @db.VarChar(100)
   recipes Recipe[]
+  authors Author[]
 }

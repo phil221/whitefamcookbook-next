@@ -26,13 +26,17 @@ export async function generateMetadata(
 
 export default async function Recipe({ params }: Props) {
   const recipe = await getRecipe(params.id);
-  const authorPath = composePathFromString(recipe?.authorName!);
+  const authorPath = composePathFromString(recipe?.authorName || "");
+  const categoryPath = composePathFromString(recipe?.category.name || "");
   return (
     <div className="p-14">
       <h1 className="text-xl">{recipe?.name}</h1>
+      <div className="flex gap-10">
       <p>
         By <Link href={`/authors/${recipe?.author.id}/${authorPath}`}>{recipe?.authorName}</Link>
       </p>
+      <Link href={`/categories/${recipe?.category.id}/${categoryPath}`}>{recipe?.category.name}</Link>
+      </div>
       <p>{JSON.stringify(recipe)}</p>
       <p>...</p>
       <Link href="/">Back to Home</Link>

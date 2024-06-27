@@ -1,5 +1,5 @@
 import { getAuthor } from "@lib/authors";
-import { composeAuthorNameFromPath, composePathFromString } from "@/utils/path";
+import { composeNameFromPath, composePathFromString } from "@/utils/path";
 import React from "react";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export default async function Author({ params }: Props) {
-  const authorName = composeAuthorNameFromPath(params.authorName);
+  const authorName = composeNameFromPath(params.authorName);
   const author = await getAuthor(authorName || "");
 
   return (

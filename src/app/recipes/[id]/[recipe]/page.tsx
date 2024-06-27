@@ -31,9 +31,9 @@ export default async function Recipe({ params }: Props) {
     <div className="p-14">
       <h1 className="text-xl">{recipe?.name}</h1>
       <p>
-        By <Link href={`/authors/${authorPath}`}>{recipe?.authorName}</Link>
+        By <Link href={`/authors/${recipe?.author.id}/${authorPath}`}>{recipe?.authorName}</Link>
       </p>
-      {/* <p>{JSON.stringify(recipe)}</p> */}
+      <p>{JSON.stringify(recipe)}</p>
       <p>...</p>
       <Link href="/">Back to Home</Link>
     </div>

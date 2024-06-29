@@ -31,16 +31,21 @@ export default async function Recipe({ params }: Props) {
   const categoryPath = composePathFromString(recipe?.category.name || "");
   const createdTime = recipe?.createdAt?.getTime() || new Date().getTime();
   return (
-    <div className="flex flex-col gap-4">
-    <div>
-      <h1 className="text-xl">{recipe?.name}</h1>
-      <p className="text-xs">Added on {getPrettyDate(createdTime)}</p>
-    </div>
+    <div className="flex flex-col mx-auto content-center gap-4 max-w-screen-lg">
       <div>
-      <p>
-        By <Link href={`/authors/${recipe?.author.id}/${authorPath}`}>{recipe?.authorName}</Link>
-      </p>
-      <Link href={`/categories/${recipe?.category.id}/${categoryPath}`}>{recipe?.category.name}</Link>
+        <h1 className="text-xl">{recipe?.name}</h1>
+        <p className="text-xs">Added on {getPrettyDate(createdTime)}</p>
+      </div>
+      <div>
+        <p>
+          By{" "}
+          <Link href={`/authors/${recipe?.author.id}/${authorPath}`}>
+            {recipe?.authorName}
+          </Link>
+        </p>
+        <Link href={`/categories/${recipe?.category.id}/${categoryPath}`}>
+          {recipe?.category.name}
+        </Link>
       </div>
       <p>{JSON.stringify(recipe)}</p>
       <p>...</p>

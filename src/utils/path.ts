@@ -7,7 +7,10 @@
  * @return {string} The composed path string.
  */
 export const composePathFromString = (str: string) => {
-  const strArray = str.toLowerCase().split(" ");
+  const strArray = str
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9 ]/g, "")
+    .split(" ");
   return strArray.length > 1 ? strArray.join("-") : strArray[0];
 };
 

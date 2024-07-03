@@ -58,7 +58,7 @@ const RecipeContent = ({ recipe }: { recipe: Recipe }) => {
         <p>Makes {servingsNumber} servings</p>
         <p>Prep Time: {prepTime} minutes</p>
       </div>
-      <hr className="border-black" />
+      <hr className="border-black my-2" />
       <div className="section ingredients">
         <ul>
           {readyIngredients.map((ingredientPair, i) => (
@@ -92,7 +92,7 @@ const RecipeContent = ({ recipe }: { recipe: Recipe }) => {
           <p className="font-medium">{category.name}</p>
         </Link>
       </div>
-      <hr className="border-black" />
+      <hr className="border-black my-2" />
       <div className="section nutrition-facts">
         <p>{nutritionFacts}</p>
       </div>

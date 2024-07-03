@@ -27,12 +27,19 @@ export async function generateMetadata(
 export default async function Recipe({ params }: Props) {
   const recipe = await getRecipe(params.id);
   const {
-    
+    authorName = "",
+    category = { name: "", id: 0 },
+    ingredients = "",
+    instructions = "",
+    name = "",
+    comment = "",
+    nutritionFacts = "",
+    servingsNumber = 0,
+    author = { id: 0 },
+    prepTime = 0,
   } = recipe || {};
-  const authorPath = composePathFromString(recipe?.authorName || "");
-  const categoryPath = composePathFromString(recipe?.category.name || "");
-  const ingredients = recipe?.ingredients!;
-  const instructions = recipe?.instructions!;
+  const authorPath = composePathFromString(authorName);
+  const categoryPath = composePathFromString(category.name);
   const formattedIngredients = ingredients.split("\n").map(item => item.trim());
   const formattedInstructions = instructions.split("\n").map(item => item.trim());
 
@@ -53,17 +60,17 @@ export default async function Recipe({ params }: Props) {
   return (
     <div className="flex flex-col mx-auto content-center gap-2 max-w-screen-lg">
       <div className="flex flex-col content-center text-center gap-1 flex-wrap">
-        <h1 className="text-xl">{recipe?.name}</h1>
+        <h1 className="text-xl">{name}</h1>
         <Link
           className="font-medium"
-          href={`/authors/${recipe?.author.id}/${authorPath}`}
+          href={`/authors/${author.id}/${authorPath}`}
         >
-          {recipe?.authorName}
+          {authorName}
         </Link>
       </div>
       <div className="section flex justify-between flex-wrap">
-        <p>Makes {recipe?.servingsNumber} servings</p>
-        <p>Prep Time: {recipe?.prepTime} minutes</p>
+        <p>Makes {servingsNumber} servings</p>
+        <p>Prep Time: {prepTime} minutes</p>
       </div>
       <hr className="border-black" />
       <div className="section ingredients">
@@ -90,20 +97,20 @@ export default async function Recipe({ params }: Props) {
         </ul>
       </div>
       {
-        recipe?.comment && (
+        comment && comment.length > 0 && (
           <div className="section comments italic mb-2">
-            <p>{recipe?.comment}</p>
+            <p>{comment}</p>
           </div>
         )
       }
       <div className="section category">
-        <Link href={`/categories/${recipe?.category.id}/${categoryPath}`}>
-          <p className="font-medium">{recipe?.category.name}</p>
+        <Link href={`/categories/${category.id}/${categoryPath}`}>
+          <p className="font-medium">{category.name}</p>
         </Link>
       </div>
       <hr className="border-black" />
       <div className="section nutrition-facts">
-        <p>{recipe?.nutritionFacts}</p>
+        <p>{nutritionFacts}</p>
       </div>
       <Link href="/">Back to all recipes</Link>
     </div>

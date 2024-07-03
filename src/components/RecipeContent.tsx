@@ -74,11 +74,9 @@ const RecipeContent = ({ recipe }: { recipe: Recipe }) => {
       <div className="section instructions my-3">
         <ul>
           {formattedInstructions.map((instruction, i) => (
-            <>
-              <li key={i} className="w-100">
-                {instruction}
-              </li>
-            </>
+            <li key={i} className="w-100">
+            {instruction}
+            </li>
           ))}
         </ul>
       </div>

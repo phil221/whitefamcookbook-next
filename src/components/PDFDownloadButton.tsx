@@ -1,14 +1,18 @@
 "use client";
 
-import { FaFilePdf } from "react-icons/fa";
-import { Options, usePDF } from "react-to-pdf";
+import { FaRegFilePdf } from "react-icons/fa";
+import { Options } from "react-to-pdf";
 
-const PDFDownloadButton = ({ toPDF }: { toPDF: (options?: Options | undefined) => void }) => {
-    return (
-        <button onClick={() => toPDF()}>
-            <FaFilePdf />
-        </button>
-    );
+const PDFDownloadButton = ({
+  toPDF,
+}: {
+  toPDF: (options?: Options | undefined) => void;
+}) => {
+  return (
+    <button onClick={() => toPDF()}>
+      <FaRegFilePdf />
+    </button>
+  );
 };
 
 export default PDFDownloadButton;

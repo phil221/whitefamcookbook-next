@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Cormorant } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const cormorant = Cormorant({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "White Family Cookbook",
@@ -17,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} p-20`}>{children}</body>
+      <body className={`${cormorant.className} p-20`}>{children}</body>
     </html>
   );
 }

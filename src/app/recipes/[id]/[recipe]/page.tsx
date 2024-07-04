@@ -19,7 +19,7 @@ export async function generateMetadata(
   const parentTitle = (await parent).title?.absolute || SITE_TITLE;
 
   return {
-    title: `${parentTitle} | ${recipe?.name ?? "Recipe"}`,
+    title: `${recipe?.name ?? "Recipe"} | ${parentTitle}`,
   };
 }
 

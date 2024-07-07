@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import prisma from "./prisma";
 
 export async function getRecipes() {
@@ -17,12 +18,21 @@ export async function getRecipe(recipeId: string) {
       include: {
         author: true,
         category: true,
-      }
+      },
     });
-    
+
     return recipe;
   } catch (error) {
     console.error("getRecipe error:", error);
+  }
+}
+
+export async function createRecipe(data: Prisma.RecipeCreateInput) {
+  try {
+    const recipe = await prisma.recipe.create({ data });
+    return recipe;
+  } catch (error) {
+    console.error("createRecipe error:", error);
   }
 }
 

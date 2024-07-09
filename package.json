@@ -11,9 +11,9 @@
   "dependencies": {
     "@prisma/client": "^5.16.1",
     "@vercel/postgres": "^0.8.0",
-    "next": "14.2.3",
-    "react": "^18",
-    "react-dom": "^18",
+    "next": "^15.0.0-rc.0",
+    "react": "^19.0.0-rc-c3cdbec0a7-20240708",
+    "react-dom": "^19.0.0-rc-c3cdbec0a7-20240708",
     "react-icons": "^5.2.1",
     "react-to-pdf": "^1.0.1"
   },

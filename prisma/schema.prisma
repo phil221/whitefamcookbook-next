@@ -17,7 +17,7 @@ model Recipe {
   prepTime       Int
   ingredients    String   @db.VarChar(500)
   instructions   String   @db.VarChar(500)
-  comment        String?  @db.VarChar(500)
+  comment        String?  @db.VarChar(1000)
   nutritionFacts String   @db.VarChar(500)
   createdAt      DateTime @default(now())
   category       Category @relation(fields: [categoryName], references: [name])

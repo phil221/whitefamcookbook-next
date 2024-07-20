@@ -5,13 +5,14 @@ import { revalidatePath } from "next/cache";
 
 export default async function Home() {
   const authors = await prisma.author.findMany();
+  const categories = await prisma.category.findMany();
 
   return (
     <main className="flex min-h-screen flex-col gap-3">
       <h1 className="text-3xl">Recipes</h1>
       <section>
         <RecipesList />
-        <AddRecipeForm authors={authors} />
+        <AddRecipeForm authors={authors} categories={categories} />
       </section>
     </main>
   );

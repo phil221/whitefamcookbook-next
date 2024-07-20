@@ -6,7 +6,6 @@ async function main() {
   //     name: "Entrees",
   //   },
   // });
-
   // const authorExample = await prisma.author.create({
   //   data: {
   //     name: "Molly Smillie",
@@ -24,19 +23,21 @@ async function main() {
   //     categoryName: "Entrees",
   //   },
   // });
-
-  const authorExample2 = await prisma.category.create({
-    data: {
-      name: "Muffins, Rolls, and other Breakfast Fare",
-    },
-  });
-
+  // const authorExample2 = await prisma.category.create({
+  //   data: {
+  //     name: "Appetizers and Party Food",
+  //   },
+  // });
+  // const authorExample3 = await prisma.category.create({
+  //   data: {
+  //     name: "Yummy Deserts",
+  //   },
+  // });
   // const authorExample2 = await prisma.recipe.delete({
   //   where: {
   //     id: 6,
   //   },
   // });
-
   // const recipeExample2 = await prisma.recipe.create({
   //   data: {
   //     name: "Father Steckler's Lamb Stew",

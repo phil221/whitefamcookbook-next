@@ -25,11 +25,11 @@ async function main() {
   //   },
   // });
 
-  // const authorExample2 = await prisma.author.create({
-  //   data: {
-  //     name: "Cathy White",
-  //   },
-  // });
+  const authorExample2 = await prisma.category.create({
+    data: {
+      name: "Muffins, Rolls, and other Breakfast Fare",
+    },
+  });
 
   // const authorExample2 = await prisma.recipe.delete({
   //   where: {
@@ -37,36 +37,36 @@ async function main() {
   //   },
   // });
 
-  const recipeExample2 = await prisma.recipe.create({
-    data: {
-      name: "Father Steckler's Lamb Stew",
-      authorName: "Liz Dillon",
-      servingsNumber: "6",
-      prepTime: 20,
-      ingredients: `2 1/2 pounds Lamb stew meat, or cut up leg
-        olive oil, as needed
-        curry powder
-        cayenne pepper
-        rosemary
-        dill
-        1 medium onion
-  1 bell pepper
-  garlic
-  1 can cream of mushroom soup
-  3/4 cup red wine
-  1 package mushroom
-  8 ounces sour cream, or 16 oz, if desired`,
-      instructions: `1. Brown lamb in olive oil sprinkled with curry powder, cayenne pepper, rosemary and dill.
-  2. Combine in a stew pot with onion, bell pepper, garlic (shallots or chives are good too), mushroom soup, and red wine. Simmer 2 1/2 hours.
-  3. Add package of mushrooms, sliced, towards the end.
-  4. Before serving, add an 8 or 16 oz container (depending on your taste) of sour cream`,
-      comment:
-        "This is a great stew, but Fr. Steckler didn't give me measurements.",
-      nutritionFacts: `Per serving (excluding unknown items): 526.9 Calories; 41.0g Fat (73.3% calories from fat); 26.7g Protein; 6.9g
-  Carbohydrate; 122mg Cholesterol; 297mg Sodium. Exchanges: 3 1/2 Lean Meat; 1/2 Vegetable; 6 1/2 Fat`,
-      categoryName: "Entrees",
-    },
-  });
+  // const recipeExample2 = await prisma.recipe.create({
+  //   data: {
+  //     name: "Father Steckler's Lamb Stew",
+  //     authorName: "Liz Dillon",
+  //     servingsNumber: "6",
+  //     prepTime: 20,
+  //     ingredients: `2 1/2 pounds Lamb stew meat, or cut up leg
+  //       olive oil, as needed
+  //       curry powder
+  //       cayenne pepper
+  //       rosemary
+  //       dill
+  //       1 medium onion
+  // 1 bell pepper
+  // garlic
+  // 1 can cream of mushroom soup
+  // 3/4 cup red wine
+  // 1 package mushroom
+  // 8 ounces sour cream, or 16 oz, if desired`,
+  //     instructions: `1. Brown lamb in olive oil sprinkled with curry powder, cayenne pepper, rosemary and dill.
+  // 2. Combine in a stew pot with onion, bell pepper, garlic (shallots or chives are good too), mushroom soup, and red wine. Simmer 2 1/2 hours.
+  // 3. Add package of mushrooms, sliced, towards the end.
+  // 4. Before serving, add an 8 or 16 oz container (depending on your taste) of sour cream`,
+  //     comment:
+  //       "This is a great stew, but Fr. Steckler didn't give me measurements.",
+  //     nutritionFacts: `Per serving (excluding unknown items): 526.9 Calories; 41.0g Fat (73.3% calories from fat); 26.7g Protein; 6.9g
+  // Carbohydrate; 122mg Cholesterol; 297mg Sodium. Exchanges: 3 1/2 Lean Meat; 1/2 Vegetable; 6 1/2 Fat`,
+  //     categoryName: "Entrees",
+  //   },
+  // });
 }
 main()
   .then(async () => {

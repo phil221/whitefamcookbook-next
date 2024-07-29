@@ -1,5 +1,6 @@
 "use client";
 
+import { getPairs } from "@/utils/getPairs";
 import PDFDownloadButton from "./PDFDownloadButton";
 import { composePathFromString } from "@/utils/path";
 import type { Recipe } from "@lib/recipes";
@@ -29,19 +30,6 @@ const RecipeContent = ({ recipe }: { recipe: Recipe }) => {
     .map((item) => item.trim());
 
   const { targetRef, toPDF } = usePDF({ filename: `${name}.pdf` });
-
-  const getPairs = (items: string[]) => {
-    return items.reduce((prev, current, i) => {
-      if (i % 2 === 0) {
-        prev.push([current]);
-        return prev;
-      } else {
-        prev[prev.length - 1].push(current);
-        return prev;
-      }
-    }, [] as string[][]);
-  };
-
   const readyIngredients = getPairs(formattedIngredients);
 
   return (

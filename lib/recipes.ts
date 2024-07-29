@@ -13,6 +13,7 @@ export async function getRecipes() {
     return recipes;
   } catch (error) {
     console.error("getRecipes error:", error);
+    return [];
   }
 }
 
@@ -43,18 +44,11 @@ export async function createRecipe(data: Prisma.RecipeCreateInput) {
 }
 
 export async function filterRecipes(author?: string, category?: string) {
-  if (!author && !category) return getRecipes();
+  if (!author && !category) return await getRecipes();
 
-  const authorFilter = {
-    authorName: {
-      equals: capitalize(author!)
-    },
-  };
-  const categoryFilter = {
-    categoryName: {
-      equals: capitalize(category!)
-    },
-  };
+  const authorFilter = author ? { authorName: { equals: capitalize(author) } } : {};
+  const categoryFilter = category ? { categoryName: { equals: capitalize(category) } } : {};
+
   const filters = (() => {
     if (author && category) {
       return {
@@ -62,14 +56,14 @@ export async function filterRecipes(author?: string, category?: string) {
       };
     }
 
-    if (author) return authorFilter;
-    if (category) return categoryFilter;
+    return author ? authorFilter : categoryFilter;
   })();
 
   try {
-    return await prisma.recipe.findMany({ where: filters });
+    return await prisma.recipe.findMany({ where: filters, include: { author: true, category: true } });
   } catch (error) {
     console.error("error in filterRecipes:", error);
+    return [];
   }
 }
 

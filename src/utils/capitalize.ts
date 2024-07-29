@@ -1,6 +1,6 @@
 export const capitalize = (str: string) => {
-    if (str.split(" ").length > 1) {
-        const words = str.split(" ");
+    const words = str.replace(/[^a-zA-Z0-9 ]/g, "").split(" ");
+    if (words.length > 1) {
         const capitalizedWords = words.map(w => w.charAt(0).toUpperCase() + w.slice(1));
         return capitalizedWords.join(" ");
     } else {

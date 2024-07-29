@@ -38,7 +38,6 @@ export async function createRecipe(data: Prisma.RecipeCreateInput) {
 }
 
 export async function filterRecipes(author?: string, category?: string) {
-  console.log({ author, category });
   if (!author && !category) return getRecipes();
 
   const authorFilter = {
@@ -63,10 +62,7 @@ export async function filterRecipes(author?: string, category?: string) {
   })();
 
   try {
-    console.log("FILTERS:", filters);
-    const recipes = await prisma.recipe.findMany({ where: filters });
-    console.log("RECIPES FROM FILTER:", recipes);
-    return recipes;
+    return await prisma.recipe.findMany({ where: filters });
   } catch (error) {
     console.error("error in filterRecipes:", error);
   }

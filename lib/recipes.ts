@@ -1,5 +1,6 @@
 import { Prisma } from ".prisma/client";
 import prisma from "./prisma";
+import { capitalize } from "@/utils/capitalize";
 
 export async function getRecipes() {
   try {
@@ -38,19 +39,16 @@ export async function createRecipe(data: Prisma.RecipeCreateInput) {
 
 export async function filterRecipes(author?: string, category?: string) {
   console.log({ author, category });
-  if (!author && !category) return;
+  if (!author && !category) return getRecipes();
 
   const authorFilter = {
     authorName: {
-      equals: author
-        ?.split(" ")
-        .map((str) => str[0].toUpperCase() + str.substring(1))
-        .join(" "),
+      equals: capitalize(author!)
     },
   };
   const categoryFilter = {
     categoryName: {
-      equals: category,
+      equals: capitalize(category!)
     },
   };
   const filters = (() => {

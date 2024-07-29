@@ -10,18 +10,8 @@ type Props = {
 };
 
 export default async function Home({ searchParams }: Props) {
-  const authors = await prisma.author.findMany();
-  const categories = await prisma.category.findMany();
-  let recipes;
-  if (!searchParams?.author && !searchParams?.category) {
-    recipes = (await getRecipes()) ?? [];
-  }
-  if (searchParams?.author) {
-    recipes = (await filterRecipes(searchParams.author)) ?? [];
-  }
-  if (searchParams?.category) {
-    recipes = (await filterRecipes(searchParams.category)) ?? [];
-  }
+  const { author, category } = searchParams ?? {};
+  const recipes = (await filterRecipes(author, category)) ?? [];
 
   return (
     <main className="flex min-h-screen flex-col gap-3">

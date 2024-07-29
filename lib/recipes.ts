@@ -4,7 +4,12 @@ import { capitalize } from "@/utils/capitalize";
 
 export async function getRecipes() {
   try {
-    const recipes = await prisma.recipe.findMany();
+    const recipes = await prisma.recipe.findMany({
+      include: {
+        author: true,
+        category: true,
+      }
+    });
     return recipes;
   } catch (error) {
     console.error("getRecipes error:", error);

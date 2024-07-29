@@ -1,16 +1,21 @@
 import Link from "next/link";
 import React from "react";
-import { getRecipes, Recipe } from "../../lib/recipes";
 import { composePathFromString } from "@/utils/path";
+import { Prisma } from "@prisma/client";
 
 export default async function RecipesList({
   recipes,
 }: {
-  recipes: Awaited<ReturnType<typeof getRecipes>>;
+  recipes: Prisma.RecipeGetPayload<{
+    include: {
+      author: true;
+      category: true;
+    };
+  }>[];
 }) {
   return (
     <ul className="pl-2 space-y-3">
-      {recipes?.map((r) => {
+      {recipes.map((r) => {
         const recipePath = composePathFromString(r.name || "");
         const authorPath = composePathFromString(r.author.name || "");
         return (

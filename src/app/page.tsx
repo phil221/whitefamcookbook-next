@@ -11,7 +11,7 @@ type Props = {
 
 export default async function Home({ searchParams }: Props) {
   const { author, category } = searchParams ?? {};
-  const recipes = (await filterRecipes(author, category)) ?? [];
+  const recipes = await filterRecipes(author, category);
 
   return (
     <main className="flex min-h-screen flex-col gap-3">

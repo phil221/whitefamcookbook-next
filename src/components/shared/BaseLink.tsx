@@ -10,7 +10,7 @@ type Props = {
 const NavLink = ({ href, text, children }: Props) => {
 
     return (
-        <Link className="text-md font-medium border-b border-transparent hover:border-gray-950 ease-in-out duration-300 hover:font-semibold" href={href}>{children ?? text}</Link>
+        <Link className="text-md font-medium border-b border-transparent hover:border-gray-950 ease-in-out duration-300 hover:font-semibold w-fit" href={href}>{children ?? text}</Link>
     );
 }
 

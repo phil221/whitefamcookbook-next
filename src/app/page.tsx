@@ -1,23 +1,7 @@
-import RecipesList from "@/components/RecipesList";
-import prisma from "../../lib/prisma";
-import { filterRecipes, getRecipes } from "@lib/recipes";
-
-type Props = {
-  searchParams?: {
-    author?: string;
-    category?: string;
-  };
-};
-
-export default async function Home({ searchParams }: Props) {
-  const { author, category } = searchParams ?? {};
-  const recipes = await filterRecipes(author, category);
-
+export default async function Home() {
   return (
-    <main className="flex min-h-screen flex-col gap-3">
-      <section>
-        <RecipesList recipes={recipes} />
-      </section>
+    <main className="flex flex-col gap-3 h-full w-full items-center justify-center">
+      <p className="text-6xl">Coming Soon...</p>
     </main>
   );
 }

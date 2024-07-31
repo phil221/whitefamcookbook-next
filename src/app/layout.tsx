@@ -20,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-beige-100 text-primary">
-      <body className={`${cormorant.className}`}>
+      <body className={`${cormorant.className} h-screen`}>
         <SiteHeader />
-        <div className="p-10 max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto h-[calc(100vh_-_82px)]">
           {children}
         </div>
       </body>

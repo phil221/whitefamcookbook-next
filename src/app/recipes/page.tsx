@@ -14,8 +14,9 @@ export default async function Recipes({ searchParams }: Props) {
     const recipes = await filterRecipes(author, category);
 
     return (
-        <main className="flex min-h-screen flex-col gap-3">
-            <section className="max-h-40">
+        <main className="flex flex-col gap-8">
+            <h1 className="text-3xl font-semibold mt-8">Recipes</h1>
+            <section className="border-[0.25px] border-gray-950 rounded-md max-h-56 overflow-scroll w-6/12 p-5">
                 <RecipesList recipes={recipes} />
             </section>
             <Link href={"/"}>Back to Home</Link>

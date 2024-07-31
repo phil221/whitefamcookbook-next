@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import NavLink from "./header/NavLink";
+import BaseLink from "./shared/BaseLink";
 
 type Props = {
 
@@ -25,11 +25,11 @@ const SiteHeader = ({ }: Props) => {
                     </Link>
                 </div>
                 <div className="hidden lg:flex lg:gap-x-4 align-center">
-                    <NavLink href={"/recipes"} text="Recipes" />
+                    <BaseLink href={"/recipes"} text="Recipes" />
                     <div className="w-px my-auto h-5 bg-gray-900" />
-                    <NavLink href={"/authors"} text="Authors" />
+                    <BaseLink href={"/authors"} text="Authors" />
                     <div className="w-px my-auto h-5 bg-gray-900" />
-                    <NavLink href={"/categories"} text="Categories" />
+                    <BaseLink href={"/categories"} text="Categories" />
                 </div>
             </nav>
         </header>

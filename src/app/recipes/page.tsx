@@ -1,6 +1,6 @@
 import RecipesList from "@/components/RecipesList";
+import BaseLink from "@/components/shared/BaseLink";
 import { filterRecipes } from "@lib/recipes";
-import Link from "next/link";
 
 type Props = {
     searchParams?: {
@@ -19,7 +19,7 @@ export default async function Recipes({ searchParams }: Props) {
             <section className="border-[0.25px] border-gray-950 rounded-md max-h-56 overflow-scroll w-6/12 p-5">
                 <RecipesList recipes={recipes} />
             </section>
-            <Link href={"/"}>Back to Home</Link>
+            <BaseLink href={"/"} text="Back to Home" />
         </main>
     );
 }

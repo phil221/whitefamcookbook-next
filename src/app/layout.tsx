@@ -19,10 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-beige-200 text-primary">
       <body className={`${cormorant.className}`}>
         <SiteHeader />
-        <div className="p-20 max-w-7xl mx-auto">
+        <div className="p-10 max-w-7xl mx-auto">
           {children}
         </div>
       </body>

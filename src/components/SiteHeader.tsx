@@ -9,7 +9,7 @@ type Props = {
 const SiteHeader = ({ }: Props) => {
 
     return (
-        <header className="bg-beige-100 border-b-[0.25px] border-gray-950 border-double sticky top-0">
+        <header className="bg-beige-200 border-b-[0.25px] border-gray-950 border-double sticky top-0">
             <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
                 <div className="flex lg:flex-1">
                     <Link href="/">
@@ -25,7 +25,7 @@ const SiteHeader = ({ }: Props) => {
                     </Link>
                 </div>
                 <div className="hidden lg:flex lg:gap-x-4 align-center">
-                    <NavLink href={"/"} text="Recipes" />
+                    <NavLink href={"/recipes"} text="Recipes" />
                     <div className="w-px my-auto h-5 bg-gray-900" />
                     <NavLink href={"/authors"} text="Authors" />
                     <div className="w-px my-auto h-5 bg-gray-900" />

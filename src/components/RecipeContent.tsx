@@ -6,6 +6,7 @@ import { composePathFromString } from "@/utils/path";
 import type { Recipe } from "@lib/recipes";
 import Link from "next/link";
 import { usePDF } from "react-to-pdf";
+import BaseLink from "./shared/BaseLink";
 
 const RecipeContent = ({ recipe }: { recipe: Recipe }) => {
   const {
@@ -89,9 +90,7 @@ const RecipeContent = ({ recipe }: { recipe: Recipe }) => {
       <div className="section nutrition-facts">
         <p>{nutritionFacts}</p>
       </div>
-      <Link className="font-medium underline" href="/">
-        Back to all recipes
-      </Link>
+      <BaseLink href="/recipes" text="Back to recipes" />
     </div>
   );
 };

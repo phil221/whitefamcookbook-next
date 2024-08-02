@@ -2,15 +2,23 @@ import prisma from "./prisma";
 
 export async function getAuthor(authorName: string) {
   try {
-    const author = await prisma.author.findUnique({
+    return await prisma.author.findUnique({
       where: { name: authorName },
       include: {
         recipes: true,
       },
     });
-    return author;
   } catch (error) {
     console.error("getAuthor error:", error);
+  }
+}
+
+export async function getAuthors() {
+  try {
+    return await prisma.author.findMany();
+  } catch (error) {
+    console.error("getAuthor error:", error);
+    return []
   }
 }
 

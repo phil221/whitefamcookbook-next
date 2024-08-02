@@ -43,20 +43,30 @@ export async function createRecipe(data: Prisma.RecipeCreateInput) {
   }
 }
 
-export async function filterRecipes(author?: string, category?: string) {
-  if (!author && !category) return await getRecipes();
+export async function filterRecipes(authors?: string | string[], category?: string) {
+  if (!authors && !category) return await getRecipes();
+  const authorsFilter = (() => {
+    if (authors) {
+      return typeof authors === 'string' ?
+        { authorName: { equals: capitalize(authors) } } :
+        { OR: [...authors.map((author) => ({ authorName: { equals: capitalize(author) } }))] };
+    }
+  })();
 
-  const authorFilter = author ? { authorName: { equals: capitalize(author) } } : {};
   const categoryFilter = category ? { categoryName: { equals: capitalize(category) } } : {};
 
   const filters = (() => {
-    if (author && category) {
+    if (authors && category) {
       return {
-        AND: [authorFilter, categoryFilter],
+        AND: [
+          { ...authorsFilter },
+          { categoryName: { equals: capitalize(category) } },
+        ],
       };
     }
 
-    return author ? authorFilter : categoryFilter;
+    if (authors) return authors ? { ...authorsFilter } : { ...categoryFilter };
+    return {};
   })();
 
   try {

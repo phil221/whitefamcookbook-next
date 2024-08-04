@@ -8,7 +8,7 @@ export async function getRecipes() {
       include: {
         author: true,
         category: true,
-      }
+      },
     });
     return recipes;
   } catch (error) {
@@ -43,34 +43,31 @@ export async function createRecipe(data: Prisma.RecipeCreateInput) {
   }
 }
 
-export async function filterRecipes(authors?: string | string[], category?: string) {
-  if (!authors && !category) return await getRecipes();
-  const authorsFilter = (() => {
-    if (authors) {
-      return typeof authors === 'string' ?
-        { authorName: { equals: capitalize(authors) } } :
-        { OR: [...authors.map((author) => ({ authorName: { equals: capitalize(author) } }))] };
-    }
-  })();
+export async function filterRecipes(
+  authors?: string | string[],
+  categories?: string | string[]
+) {
+  if (!authors && !categories) return await getRecipes();
 
-  const categoryFilter = category ? { categoryName: { equals: capitalize(category) } } : {};
+  const categoriesFilter = (() => composeFilter(categories))();
+  const authorsFilter = (() => composeFilter(authors))();
 
   const filters = (() => {
-    if (authors && category) {
+    if (authors && categories) {
       return {
-        AND: [
-          { ...authorsFilter },
-          { categoryName: { equals: capitalize(category) } },
-        ],
+        AND: [{ ...authorsFilter }, { ...categoriesFilter }],
       };
     }
 
-    if (authors) return authors ? { ...authorsFilter } : { ...categoryFilter };
-    return {};
+    if (authors) return { ...authorsFilter };
+    if (categories) return { ...categoriesFilter };
   })();
 
   try {
-    return await prisma.recipe.findMany({ where: filters, include: { author: true, category: true } });
+    return await prisma.recipe.findMany({
+      where: filters,
+      include: { author: true, category: true },
+    });
   } catch (error) {
     console.error("error in filterRecipes:", error);
     return [];
@@ -78,3 +75,17 @@ export async function filterRecipes(authors?: string | string[], category?: stri
 }
 
 export type Recipe = Awaited<ReturnType<typeof getRecipe>>;
+
+function composeFilter(filter: string | string[] | undefined) {
+  if (!filter) return {};
+
+  return typeof filter === "string"
+    ? { categoryName: { equals: capitalize(filter) } }
+    : {
+        OR: [
+          ...filter.map((filter) => ({
+            categoryName: { equals: capitalize(filter) },
+          })),
+        ],
+      };
+}

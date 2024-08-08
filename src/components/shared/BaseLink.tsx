@@ -14,10 +14,7 @@ type Props = {
 const NavLink = ({ href, text, children, className, ...props }: Props) => {
     const [active, setActive] = React.useState(false)
 
-    useEffect(() => {
-        console.log({ href })
-        setActive(window ? window.location.pathname === href : false)
-    }, [])
+    useEffect(() => setActive(window ? window.location.pathname === href : false), [])
 
     return (
         <Link

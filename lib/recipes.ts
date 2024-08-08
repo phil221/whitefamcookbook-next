@@ -49,21 +49,22 @@ export async function filterRecipes(
 ) {
   if (!authors && !categories) return await getRecipes();
 
-  const categoriesFilter = (() => composeFilter(categories))();
-  const authorsFilter = (() => composeFilter(authors))();
+  const categoriesFilter = composeFilter(categories, "categories");
+  const authorsFilter = composeFilter(authors, "authors");
 
   const filters = (() => {
     if (authors && categories) {
       return {
-        AND: [{ ...authorsFilter }, { ...categoriesFilter }],
+        AND: [authorsFilter, categoriesFilter],
       };
     }
 
-    if (authors) return { ...authorsFilter };
-    if (categories) return { ...categoriesFilter };
+    if (authors) return authorsFilter;
+    if (categories) return categoriesFilter;
   })();
 
   try {
+    console.log({ filters });
     return await prisma.recipe.findMany({
       where: filters,
       include: { author: true, category: true },
@@ -76,16 +77,16 @@ export async function filterRecipes(
 
 export type Recipe = Awaited<ReturnType<typeof getRecipe>>;
 
-function composeFilter(filter: string | string[] | undefined) {
+function composeFilter(filter: string | string[] | undefined, type: "authors" | "categories") {
   if (!filter) return {};
-
+  const filterName = type === "authors" ? "authorName" : "categoryName";
   return typeof filter === "string"
-    ? { categoryName: { equals: capitalize(filter) } }
+    ? { [filterName]: { equals: capitalize(filter) } }
     : {
-        OR: [
-          ...filter.map((filter) => ({
-            categoryName: { equals: capitalize(filter) },
-          })),
-        ],
-      };
+      OR: [
+        ...filter.map((filter) => ({
+          [filterName]: { equals: capitalize(filter) },
+        })),
+      ],
+    };
 }

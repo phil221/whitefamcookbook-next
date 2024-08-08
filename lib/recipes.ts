@@ -64,7 +64,6 @@ export async function filterRecipes(
   })();
 
   try {
-    console.log({ filters });
     return await prisma.recipe.findMany({
       where: filters,
       include: { author: true, category: true },

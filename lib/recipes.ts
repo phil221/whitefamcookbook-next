@@ -76,16 +76,19 @@ export async function filterRecipes(
 
 export type Recipe = Awaited<ReturnType<typeof getRecipe>>;
 
-function composeFilter(filter: string | string[] | undefined, type: "authors" | "categories") {
+function composeFilter(
+  filter: string | string[] | undefined,
+  type: "authors" | "categories"
+) {
   if (!filter) return {};
   const filterName = type === "authors" ? "authorName" : "categoryName";
   return typeof filter === "string"
     ? { [filterName]: { equals: capitalize(filter) } }
     : {
-      OR: [
-        ...filter.map((filter) => ({
-          [filterName]: { equals: capitalize(filter) },
-        })),
-      ],
-    };
+        OR: [
+          ...filter.map((filter) => ({
+            [filterName]: { equals: capitalize(filter) },
+          })),
+        ],
+      };
 }

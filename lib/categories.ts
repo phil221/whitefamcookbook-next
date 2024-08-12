@@ -3,7 +3,7 @@ import prisma from "./prisma";
 export async function getCategory(categoryName: string) {
   try {
     const category = await prisma.category.findUnique({
-      where: { name: categoryName },
+      where: { name: decodeURIComponent(categoryName) },
       include: {
         recipes: true,
         authors: true,

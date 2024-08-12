@@ -25,7 +25,6 @@ export async function generateMetadata(
 
 export default async function Recipe({ params }: Props) {
   const recipe = await getRecipe(params.id);
-
   return (
     <div className="flex flex-col mx-auto content-center gap-2 max-w-screen-md py-5">
       <RecipeContent recipe={recipe} />

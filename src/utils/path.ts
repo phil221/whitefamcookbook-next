@@ -10,7 +10,7 @@ export const composePathFromString = (str: string) => {
   if (str.split(" ").length > 1) {
     return encodeURIComponent(str
       .split(" ")
-      .map(s => s.replace(/[^a-zA-Z0-9 ]/g, "").toLowerCase()).join("-"));
+      .map(s => s.replace(/[^a-zA-Z0-9& ]/g, "").toLowerCase()).join("-"));
   }
 
   return encodeURIComponent(str.toLowerCase())
@@ -24,6 +24,7 @@ export const composePathFromString = (str: string) => {
  * @return {string} The composed name string.
  */
 export const composeNameFromPath = (path: string) => {
+  if (path.includes("matriarch")) return "The 'Matriarch'"
   try {
     return path
       .split("-")

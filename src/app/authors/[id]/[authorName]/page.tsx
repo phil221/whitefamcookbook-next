@@ -2,6 +2,20 @@ import { getAuthor } from "@lib/authors";
 import { composeNameFromPath, composePathFromString } from "@/utils/path";
 import React from "react";
 import Link from "next/link";
+import { SITE_TITLE } from "@/constants";
+import { ResolvingMetadata, Metadata } from "next";
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const author = composeNameFromPath(params.authorName);
+  const parentTitle = (await parent).title?.absolute || SITE_TITLE;
+
+  return {
+    title: `${author ?? "Author"} | ${parentTitle}`,
+  };
+}
 
 type Props = {
   params: {

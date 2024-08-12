@@ -4,13 +4,6 @@ import { Metadata, ResolvingMetadata } from "next";
 import { SITE_TITLE } from "@/constants";
 import RecipeContent from "@/components/RecipeContent";
 
-type Props = {
-  params: {
-    recipe: string;
-    id: string;
-  };
-};
-
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
@@ -22,6 +15,14 @@ export async function generateMetadata(
     title: `${recipe?.name ?? "Recipe"} | ${parentTitle}`,
   };
 }
+
+type Props = {
+  params: {
+    recipe: string;
+    id: string;
+  };
+};
+
 
 export default async function Recipe({ params }: Props) {
   const recipe = await getRecipe(params.id);

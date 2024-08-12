@@ -16,11 +16,11 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-    const category = composeNameFromPath(params.categoryName);
+  const category = composeNameFromPath(params.categoryName);
   const parentTitle = (await parent).title?.absolute || SITE_TITLE;
 
   return {
-    title: `${parentTitle} | ${category ?? "category"}`,
+    title: `${category ?? "Category"} | ${parentTitle}`,
   };
 }
 

@@ -85,10 +85,10 @@ function composeFilter(
   return typeof filter === "string"
     ? { [filterName]: { equals: capitalize(filter) } }
     : {
-        OR: [
-          ...filter.map((filter) => ({
-            [filterName]: { equals: capitalize(filter) },
-          })),
-        ],
-      };
+      OR: [
+        ...filter.map((filter) => ({
+          [filterName]: { equals: capitalize(filter) },
+        })),
+      ],
+    };
 }

@@ -45,14 +45,19 @@ export async function createRecipe(data: Prisma.RecipeCreateInput) {
 
 export async function filterRecipes(
   authors?: string | string[],
-  categories?: string | string[]
+  categories?: string | string[],
+  q?: string
 ) {
-  if (!authors && !categories) return await getRecipes();
+  if (!authors && !categories && !q) return await getRecipes();
 
+  console.log({ authors, categories, q });
+  const qFilter = composeFilter(q, "q");
   const categoriesFilter = composeFilter(categories, "categories");
   const authorsFilter = composeFilter(authors, "authors");
 
   const filters = (() => {
+    if (q) return qFilter;
+
     if (authors && categories) {
       return {
         AND: [authorsFilter, categoriesFilter],
@@ -78,16 +83,17 @@ export type Recipe = Awaited<ReturnType<typeof getRecipe>>;
 
 function composeFilter(
   filter: string | string[] | undefined,
-  type: "authors" | "categories"
+  type: "authors" | "categories" | "q"
 ) {
   if (!filter) return {};
+  if (type === "q") return { name: { contains: filter as string } };
   const filterName = type === "authors" ? "authorName" : "categoryName";
   return typeof filter === "string"
     ? { [filterName]: { equals: capitalize(filter) } }
     : {
       OR: [
-        ...filter.map((filter) => ({
-          [filterName]: { equals: capitalize(filter) },
+        ...filter.map((f) => ({
+          [filterName]: { equals: capitalize(f) },
         })),
       ],
     };

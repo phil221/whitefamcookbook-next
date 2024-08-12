@@ -7,11 +7,13 @@
  * @return {string} The composed path string.
  */
 export const composePathFromString = (str: string) => {
-  const strArray = str
-    .toLowerCase()
-    .replace(/[^a-zA-Z0-9 ]/g, "")
-    .split(" ");
-  return strArray.length > 1 ? strArray.join("-") : strArray[0];
+  if (str.split(" ").length > 1) {
+    return encodeURIComponent(str
+      .split(" ")
+      .map(s => s.replace(/[^a-zA-Z0-9 ]/g, "").toLowerCase()).join("-"));
+  }
+
+  return encodeURIComponent(str.toLowerCase())
 };
 
 /**

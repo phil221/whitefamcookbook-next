@@ -50,23 +50,46 @@ export async function filterRecipes(
 ) {
   if (!authors && !categories && !q) return await getRecipes();
 
-  console.log({ authors, categories, q });
   const qFilter = composeFilter(q, "q");
   const categoriesFilter = composeFilter(categories, "categories");
   const authorsFilter = composeFilter(authors, "authors");
+  const hasAuthorsFilter = authors && authors.length > 0;
+  const hasCategoriesFilter = categories && categories.length > 0;
+  const hasQFilter = q && q.length > 0;
 
-  const filters = (() => {
-    if (q) return qFilter;
+  let filters = {};
 
-    if (authors && categories) {
-      return {
+  switch (true) {
+    case hasAuthorsFilter && hasCategoriesFilter && hasQFilter:
+      filters = {
+        AND: [authorsFilter, categoriesFilter, qFilter],
+      };
+      break;
+    case hasAuthorsFilter && hasCategoriesFilter && !hasQFilter:
+      filters = {
         AND: [authorsFilter, categoriesFilter],
       };
-    }
-
-    if (authors) return authorsFilter;
-    if (categories) return categoriesFilter;
-  })();
+      break;
+    case hasAuthorsFilter && !hasCategoriesFilter && hasQFilter:
+      filters = {
+        AND: [authorsFilter, qFilter],
+      };
+      break;
+    case !hasAuthorsFilter && hasCategoriesFilter && hasQFilter:
+      filters = {
+        AND: [categoriesFilter, qFilter],
+      };
+      break;
+    case hasAuthorsFilter:
+      filters = authorsFilter;
+      break;
+    case hasCategoriesFilter:
+      filters = categoriesFilter;
+      break;
+    case hasQFilter:
+      filters = qFilter;
+      break;
+  }
 
   try {
     return await prisma.recipe.findMany({

@@ -13,18 +13,21 @@ export default async function RecipesList({
     };
   }>[];
 }) {
+
+  const recipesList = recipes.map((r) => {
+    const recipePath = composePathFromString(r.name || "");
+    const authorPath = composePathFromString(r.author.name || "");
+    return (
+      <li className="flex flex-col" key={r.id}>
+        <Link className="text-lg" href={`/recipes/${r.id}/${recipePath}`}>{r.name}</Link>
+        <Link className="text-sm" href={`/authors/${r.author.id}/${authorPath}`}>{r.authorName}</Link>
+      </li>
+    );
+  })
+
   return (
     <ul className="pl-2 space-y-3">
-      {recipes.map((r) => {
-        const recipePath = composePathFromString(r.name || "");
-        const authorPath = composePathFromString(r.author.name || "");
-        return (
-          <li className="flex flex-col" key={r.id}>
-            <Link className="text-lg" href={`/recipes/${r.id}/${recipePath}`}>{r.name}</Link>
-            <Link className="text-sm" href={`/authors/${r.author.id}/${authorPath}`}>{r.authorName}</Link>
-          </li>
-        );
-      })}
+      {recipes.length > 0 ? recipesList : <p>No recipes found.</p>}
     </ul>
   );
 }

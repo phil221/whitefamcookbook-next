@@ -9,6 +9,7 @@ import { SITE_TITLE } from "@/constants";
 import { ResolvingMetadata, Metadata } from "next";
 import ClearFilterText from "./components/ClearFilterText";
 import SearchInput from "./components/SearchInput";
+import { Suspense } from "react";
 
 export async function generateMetadata(
   parent: ResolvingMetadata
@@ -30,14 +31,14 @@ type Props = {
 
 export default async function Recipes({ searchParams }: Props) {
   const { author, category, q } = searchParams ?? {};
-  const recipes = await (q ? filterRecipes(undefined, undefined, q) : filterRecipes(author, category));
+  const recipes = await (q ? filterRecipes(author, category, q) : filterRecipes(author, category));
   const authors = await getAuthors();
   const categories = await getCategories();
 
   return (
     <main className="flex flex-col gap-4">
       <h1 className="text-3xl font-semibold mt-5">Recipes</h1>
-      {!searchParams?.q && <ClearFilterText />}
+      <ClearFilterText />
       <div className="flex gap-5">
         <section className="border-[0.25px] border-gray-950 rounded-md max-h-[60vh] overflow-scroll w-3/12 p-5">
           <AuthorFilters authors={authors} />
@@ -46,7 +47,9 @@ export default async function Recipes({ searchParams }: Props) {
         </section>
         <section className="border-[0.25px] border-gray-950 flex flex-col gap-2 rounded-md max-h-[60vh] overflow-scroll w-6/12 p-5">
           <SearchInput />
-          <RecipesList recipes={recipes} />
+          <Suspense key={recipes.length} fallback={<p>Loading...</p>}>
+            <RecipesList recipes={recipes} />
+          </Suspense>
         </section>
       </div>
       <BaseLink href={"/"} text="Back to Home" />

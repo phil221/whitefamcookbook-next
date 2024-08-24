@@ -6,20 +6,14 @@ import AuthorFilters from "./(filters)/AuthorFilters";
 import { getCategories } from "@lib/categories";
 import CategoryFilters from "./(filters)/CategoryFilters";
 import { SITE_TITLE } from "@/constants";
-import { ResolvingMetadata, Metadata } from "next";
+import { Metadata } from "next";
 import ClearFilterText from "./components/ClearFilterText";
 import SearchInput from "./components/SearchInput";
 import { Suspense } from "react";
 
-export async function generateMetadata(
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const parentTitle = (await parent).title?.absolute || SITE_TITLE;
-
-  return {
-    title: `Recipes | ${parentTitle}`,
-  };
-}
+export const metadata: Metadata = {
+  title: `Recipes | ${SITE_TITLE}`,
+};
 
 type Props = {
   searchParams?: {
@@ -31,7 +25,9 @@ type Props = {
 
 export default async function Recipes({ searchParams }: Props) {
   const { author, category, q } = searchParams ?? {};
-  const recipes = await (q ? filterRecipes(author, category, q) : filterRecipes(author, category));
+  const recipes = await (q
+    ? filterRecipes(author, category, q)
+    : filterRecipes(author, category));
   const authors = await getAuthors();
   const categories = await getCategories();
 

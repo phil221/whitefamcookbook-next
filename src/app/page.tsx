@@ -1,15 +1,9 @@
 import { SITE_TITLE } from "@/constants";
-import { ResolvingMetadata, Metadata } from "next";
+import { Metadata } from "next";
 
-export async function generateMetadata(
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const parentTitle = (await parent).title?.absolute || SITE_TITLE;
-
-  return {
-    title: `Home | ${parentTitle}`,
-  };
-}
+export const metadata: Metadata = {
+  title: `Home | ${SITE_TITLE}`,
+};
 
 export default async function Home() {
   return (

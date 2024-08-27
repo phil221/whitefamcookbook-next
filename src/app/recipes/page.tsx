@@ -36,12 +36,13 @@ export default async function Recipes({ searchParams }: Props) {
       <h1 className="text-3xl font-semibold mt-5">Recipes</h1>
       <ClearFilterButton />
       <div className="flex gap-5">
-        <section className="border-[0.25px] border-gray-950 rounded-md max-h-[60vh] overflow-scroll w-3/12 p-5">
+        <section className="max-h-[60vh] overflow-scroll w-3/12 p-5">
           <AuthorFilters authors={authors} />
           <div className="w-100 my-4 h-px bg-gray-900" />
           <CategoryFilters categories={categories} />
         </section>
-        <section className="border-[0.25px] border-gray-950 flex flex-col gap-2 rounded-md max-h-[60vh] overflow-scroll w-6/12 p-5">
+        <div className="h-100 w-[0.5px] bg-gray-900" />
+        <section className="flex flex-col gap-2 max-h-[60vh] overflow-scroll w-6/12 p-5">
           <SearchInput />
           <Suspense key={recipes.length} fallback={<p>Loading...</p>}>
             <RecipesList recipes={recipes} />

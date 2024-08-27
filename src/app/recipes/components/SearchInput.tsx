@@ -9,13 +9,20 @@ const SearchInput = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [searchValue, setSearchValue] = useState("");
+    const params = new URLSearchParams(searchParams.toString());
 
     const search = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
-        const params = new URLSearchParams(searchParams.toString());
-        searchValue.length > 0 ? params.set("q", e.target.value) : params.delete("q");
+        params.set("q", e.target.value);
         router.push(`/recipes?${params.toString()}`);
     }
+
+    useEffect(() => {
+        if (searchValue.length === 0) {
+            params.delete("q");
+            router.push(`/recipes?${params.toString()}`);
+        }
+    }, [searchValue])
 
     return (
         <div className='flex gap-3'>

@@ -25,9 +25,7 @@ type Props = {
 
 export default async function Recipes({ searchParams }: Props) {
   const { author, category, q } = searchParams ?? {};
-  const recipes = await (q
-    ? filterRecipes(author, category, q)
-    : filterRecipes(author, category));
+  const recipes = await filterRecipes(author, category, q);
   const authors = await getAuthors();
   const categories = await getCategories();
 

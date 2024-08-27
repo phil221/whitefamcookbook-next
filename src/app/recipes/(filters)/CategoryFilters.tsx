@@ -4,8 +4,7 @@ import cn from "@/utils/cn";
 import useGetQueryString from "@/utils/useGetQueryString";
 import { Category } from "@prisma/client";
 import Link from "next/link";
-import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 
 type Props = {
   categories: Category[];

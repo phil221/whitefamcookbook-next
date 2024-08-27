@@ -5,7 +5,6 @@ import useGetQueryString from "@/utils/useGetQueryString";
 import { Author } from "@prisma/client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useCallback } from "react";
 
 type Props = {
     authors: Author[];

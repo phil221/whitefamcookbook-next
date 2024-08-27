@@ -109,7 +109,7 @@ function composeFilter(
   type: "authors" | "categories" | "q"
 ) {
   if (!filter) return {};
-  if (type === "q") return { name: { contains: filter as string } };
+  if (type === "q") return { name: { contains: filter as string, mode: "insensitive" } };
   const filterName = type === "authors" ? "authorName" : "categoryName";
   return typeof filter === "string"
     ? { [filterName]: { equals: capitalize(filter) } }

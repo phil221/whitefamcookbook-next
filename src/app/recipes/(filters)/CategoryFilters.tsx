@@ -22,16 +22,13 @@ export default function CategoryFilters({ categories }: Props) {
           const isActive = searchParams.getAll("category")?.includes(category.name);
           return (
             <div key={category.id}>
-              <label className="flex gap-2">
-                <Link href={`?${createQueryString("category", category.name)}`}>
-                  <p className={cn("text-md",
-                    {
-                      "font-semibold": isActive,
-                      "underline": isActive
-                    })}
-                  >{category.name}</p>
-                </Link>
-              </label>
+              <Link className={cn("border-b border-transparent text-md",
+                {
+                  "font-semibold": isActive,
+                  "border-gray-950": isActive
+                })} href={`?${createQueryString("category", category.name)}`}
+              >{category.name}
+              </Link>
             </div>
           );
         })}

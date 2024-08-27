@@ -22,16 +22,13 @@ export default function AuthorFilters({ authors }: Props) {
                     const isActive = searchParams.getAll("author")?.includes(author.name);
                     return (
                         <div key={author.id}>
-                            <label className="flex gap-2">
-                                <Link href={`?${createQueryString("author", author.name)}`}>
-                                    <p className={cn("text-md",
-                                        {
-                                            "font-semibold": isActive,
-                                            "underline": isActive
-                                        })}
-                                    >{author.name}</p>
-                                </Link>
-                            </label>
+                            <Link className={cn("border-b border-transparent text-md",
+                                {
+                                    "font-semibold": isActive,
+                                    "border-gray-950": isActive
+                                })} href={`?${createQueryString("author", author.name)}`}
+                            >{author.name}
+                            </Link>
                         </div>
                     )
                 }

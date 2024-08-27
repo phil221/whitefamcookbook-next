@@ -7,7 +7,7 @@ import { getCategories } from "@lib/categories";
 import CategoryFilters from "./(filters)/CategoryFilters";
 import { SITE_TITLE } from "@/constants";
 import { Metadata } from "next";
-import ClearFilterText from "./components/ClearFilterText";
+import ClearFilterButton from "./components/ClearFilterButton";
 import SearchInput from "./components/SearchInput";
 import { Suspense } from "react";
 
@@ -34,7 +34,7 @@ export default async function Recipes({ searchParams }: Props) {
   return (
     <main className="flex flex-col gap-4">
       <h1 className="text-3xl font-semibold mt-5">Recipes</h1>
-      <ClearFilterText />
+      <ClearFilterButton />
       <div className="flex gap-5">
         <section className="border-[0.25px] border-gray-950 rounded-md max-h-[60vh] overflow-scroll w-3/12 p-5">
           <AuthorFilters authors={authors} />

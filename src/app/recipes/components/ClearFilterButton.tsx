@@ -4,7 +4,7 @@ import BaseLink from "@/components/shared/BaseLink";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 
-const ClearFilterText = () => {
+const ClearFilterButton = () => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
 
@@ -29,4 +29,4 @@ const ClearFilterText = () => {
   );
 };
 
-export default ClearFilterText;
+export default ClearFilterButton;

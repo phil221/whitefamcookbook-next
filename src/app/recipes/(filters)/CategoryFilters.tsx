@@ -12,7 +12,6 @@ type Props = {
 
 export default function CategoryFilters({ categories }: Props) {
   const searchParams = useSearchParams();
-
   const createQueryString = (name: string, value: string) => useGetQueryString(searchParams, name, value)();
 
   return (

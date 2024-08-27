@@ -25,14 +25,20 @@ type Props = {
 
 export default async function Recipes({ searchParams }: Props) {
   const { author, category, q } = searchParams ?? {};
+  const paramsLength = Object.keys(searchParams ?? {}).length;
   const recipes = await filterRecipes(author, category, q);
   const authors = await getAuthors();
   const categories = await getCategories();
 
+  const hasSearchValue = q && q.length > 0;
+  const filtersAmount = hasSearchValue ? paramsLength - 1 : paramsLength;
+
   return (
     <main className="flex flex-col gap-4">
-      <h1 className="text-3xl font-semibold mt-5">Recipes</h1>
-      <ClearFilterButton />
+      <div className="flex gap-10">
+        <h1 className="text-3xl font-semibold">Recipes</h1>
+        {filtersAmount > 0 && <ClearFilterButton filtersAmount={filtersAmount} />}
+      </div>
       <div className="flex gap-5">
         <section className="max-h-[60vh] overflow-scroll w-3/12 p-5">
           <AuthorFilters authors={authors} />

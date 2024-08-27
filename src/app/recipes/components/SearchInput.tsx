@@ -1,6 +1,5 @@
 "use client";
 
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -11,12 +10,6 @@ const SearchInput = () => {
     const [searchValue, setSearchValue] = useState("");
     const params = new URLSearchParams(searchParams.toString());
 
-    const search = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchValue(e.target.value);
-        params.set("q", e.target.value);
-        router.push(`/recipes?${params.toString()}`);
-    }
-
     useEffect(() => {
         if (searchValue.length === 0) {
             params.delete("q");
@@ -24,10 +17,19 @@ const SearchInput = () => {
         }
     }, [searchValue])
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (searchValue.length > 0) params.set("q", searchValue);
+            router.push(`/recipes?${params.toString()}`);
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [searchValue])
+
     return (
         <div className='flex gap-3'>
             <input
-                onChange={search}
+                onChange={e => setSearchValue(e.target.value)}
                 className="border-[0.25px] border-gray-950 rounded-md p-1 w-6/12"
                 value={searchValue}
                 type="text"

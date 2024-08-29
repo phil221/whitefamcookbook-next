@@ -2,6 +2,7 @@
 
 import cn from "@/utils/cn";
 import Link, { LinkProps } from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
 
 type Props = {
@@ -12,12 +13,8 @@ type Props = {
 } & LinkProps;
 
 const NavLink = ({ href, text, children, className, ...props }: Props) => {
-  const [active, setActive] = React.useState(false);
-
-  useEffect(
-    () => setActive(window ? window.location.pathname === href : false),
-    [href]
-  );
+  const pathname = usePathname();
+  const isActive = pathname === href;
 
   return (
     <Link
@@ -25,8 +22,8 @@ const NavLink = ({ href, text, children, className, ...props }: Props) => {
         "text-md font-medium border-b border-transparent hover:border-gray-950 ease-in-out duration-300 hover:font-semibold w-fit",
         className,
         {
-          "border-gray-950": active,
-          "font-semibold": active,
+          "border-gray-950": isActive,
+          "font-semibold": isActive,
         }
       )}
       href={href}

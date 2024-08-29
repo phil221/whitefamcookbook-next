@@ -1,7 +1,7 @@
 "use client";
 
 import cn from "@/utils/cn";
-import useGetQueryString from "@/utils/useGetQueryString";
+import getQueryString from "@/utils/getQueryString";
 import { Category } from "@prisma/client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -12,7 +12,6 @@ type Props = {
 
 export default function CategoryFilters({ categories }: Props) {
   const searchParams = useSearchParams();
-  const createQueryString = (name: string, value: string) => useGetQueryString(searchParams, name, value)();
 
   return (
     <>
@@ -26,7 +25,7 @@ export default function CategoryFilters({ categories }: Props) {
                 {
                   "font-semibold": isActive,
                   "border-gray-950": isActive
-                })} href={`?${createQueryString("category", category.name)}`}
+                })} href={`?${getQueryString(searchParams, "category", category.name)}`}
               >{category.name}
               </Link>
             </div>

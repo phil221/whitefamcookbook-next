@@ -1,7 +1,7 @@
 'use client';
 
 import cn from "@/utils/cn";
-import useGetQueryString from "@/utils/useGetQueryString";
+import getQueryString from "@/utils/getQueryString";
 import { Author } from "@prisma/client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -12,7 +12,6 @@ type Props = {
 
 export default function AuthorFilters({ authors }: Props) {
     const searchParams = useSearchParams();
-    const createQueryString = (name: string, value: string) => useGetQueryString(searchParams, name, value)();
 
     return (
         <>
@@ -26,7 +25,7 @@ export default function AuthorFilters({ authors }: Props) {
                                 {
                                     "font-semibold": isActive,
                                     "border-gray-950": isActive
-                                })} href={`?${createQueryString("author", author.name)}`}
+                                })} href={`?${getQueryString(searchParams, "author", author.name)}`}
                             >{author.name}
                             </Link>
                         </div>

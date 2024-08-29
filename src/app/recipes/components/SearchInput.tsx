@@ -1,5 +1,6 @@
 "use client";
 
+import useIsFirstRender from '@/utils/useIsFirstRender';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -7,11 +8,14 @@ import React, { useEffect, useState } from 'react'
 const SearchInput = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [searchValue, setSearchValue] = useState("");
     const params = new URLSearchParams(searchParams.toString());
 
+    const [searchValue, setSearchValue] = useState(params.get("q") ?? "");
+    const isFirstRender = useIsFirstRender().current;
+
     useEffect(() => {
-        if (searchValue.length === 0) {
+        console.log({ searchValue, isFirstRender });
+        if (searchValue.length === 0 && !isFirstRender) {
             params.delete("q");
             router.push(`/recipes?${params.toString()}`);
         }
@@ -21,7 +25,7 @@ const SearchInput = () => {
         const timer = setTimeout(() => {
             if (searchValue.length > 0) params.set("q", searchValue);
             router.push(`/recipes?${params.toString()}`);
-        }, 500);
+        }, 200);
 
         return () => clearTimeout(timer);
     }, [searchValue])

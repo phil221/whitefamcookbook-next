@@ -28,7 +28,7 @@ export default function RootLayout({
         <footer className="h-20 bg-beige-200 border-t-[0.25px] border-gray-950 border-double">
           <div className="max-w-7xl mx-auto h-full p-6 lg:px-8">
             <p className="text-center text-gray-800">
-              &copy; 2022 The White Family Cookbook
+              &copy; {new Date().getFullYear()} The White Family Cookbook
             </p>
           </div>
         </footer>

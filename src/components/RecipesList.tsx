@@ -13,17 +13,22 @@ export default async function RecipesList({
     };
   }>[];
 }) {
-
   const recipesList = recipes.map((r) => {
     const recipePath = composePathFromString(r.name || "");
-    const authorPath = composePathFromString(r.author.name || "");
+
     return (
-      <li className="flex flex-col" key={r.id}>
-        <Link className="text-lg" href={`/recipes/${r.id}/${recipePath}`}>{r.name}</Link>
-        <Link className="text-sm" href={`/authors/${r.author.id}/${authorPath}`}>{r.authorName}</Link>
-      </li>
+      <Link
+        className="text-lg"
+        href={`/recipes/${r.id}/${recipePath}`}
+        key={r.id}
+      >
+        <li className="flex items-center justify-between cursor-pointer hover:bg-beige-200 p-2 rounded">
+          <p className="text-md">{r.name}</p>
+          <p className="text-sm">{r.authorName}</p>
+        </li>
+      </Link>
     );
-  })
+  });
 
   return (
     <ul className="pl-2 space-y-3">

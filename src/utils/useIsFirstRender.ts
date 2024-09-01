@@ -6,7 +6,6 @@ const useIsFirstRender = () => {
   console.log("should annoy the linter!!");
   console.log("should annoy the linter!!");
   console.log("should annoy the linter!!");
-  console.log("should annoy the linter!!");
 
   useEffect(() => {
     if (isFirstRender.current) {

@@ -1,3 +1,3 @@
 {
-  "**/*.{ts,tsx}": ["next lint"]
+  "**/*.{ts,tsx}": ["eslint . --ignore-pattern \"prisma/seed.ts\""]
 }

@@ -18,12 +18,13 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/constants/*": ["./src/constants.ts"],
-      "@/components/*": ["./src/components/*"],
+      "@/*": ["./app/*"],
+      "@/constants/*": ["./app/constants.ts"],
+      "@/components/*": ["./app/components/*"],
       "@lib/*": ["./lib/*"],
-      "@utils/*": ["./src/utils/*"]
-    }
+      "@utils/*": ["./utils/*"]
+    },
+    "target": "ES2017"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

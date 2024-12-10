@@ -5,10 +5,8 @@ import Link from "next/link";
 import { SITE_TITLE } from "@/constants";
 import { ResolvingMetadata, Metadata } from "next";
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const params = await props.params;
   const author = composeNameFromPath(params.authorName);
   const parentTitle = (await parent).title?.absolute || SITE_TITLE;
 
@@ -18,12 +16,13 @@ export async function generateMetadata(
 }
 
 type Props = {
-  params: {
+  params: Promise<{
     authorName: string;
-  };
+  }>;
 };
 
-export default async function Author({ params }: Props) {
+export default async function Author(props: Props) {
+  const params = await props.params;
   const authorName = composeNameFromPath(params.authorName);
   const author = await getAuthor(authorName || "");
 

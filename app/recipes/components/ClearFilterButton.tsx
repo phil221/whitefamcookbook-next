@@ -1,6 +1,6 @@
 "use client";
 
-import BaseLink from "@/components/shared/BaseLink";
+import BaseLink from "../../components/shared/BaseLink";
 
 const ClearFilterButton = ({ filtersAmount }: { filtersAmount: number }) => (
   <div className="flex items-center gap-5">

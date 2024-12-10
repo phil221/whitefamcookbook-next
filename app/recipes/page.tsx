@@ -1,30 +1,30 @@
-import React from "react";
-import RecipesList from "@/components/RecipesList";
-import BaseLink from "@/components/shared/BaseLink";
-import { getAuthors } from "@lib/authors";
-import { filterRecipes } from "@lib/recipes";
-import AuthorFilters from "./(filters)/AuthorFilters";
-import { getCategories } from "@lib/categories";
-import CategoryFilters from "./(filters)/CategoryFilters";
 import { SITE_TITLE } from "@/constants";
+import { getAuthors } from "@lib/authors";
+import { getCategories } from "@lib/categories";
+import { filterRecipes } from "@lib/recipes";
 import { Metadata } from "next";
+import { Suspense } from "react";
+import RecipesList from "../components/RecipesList";
+import BaseLink from "../components/shared/BaseLink";
+import AuthorFilters from "./(filters)/AuthorFilters";
+import CategoryFilters from "./(filters)/CategoryFilters";
 import ClearFilterButton from "./components/ClearFilterButton";
 import SearchInput from "./components/SearchInput";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: `Recipes | ${SITE_TITLE}`,
 };
 
 type Props = {
-  searchParams?: {
+  searchParams?: Promise<{
     author?: string | string[];
     category?: string;
     q?: string;
-  };
+  }>;
 };
 
-export default async function Recipes({ searchParams }: Props) {
+export default async function Recipes(props: Props) {
+  const searchParams = await props.searchParams;
   const { author, category, q } = searchParams ?? {};
   const paramsLength = Object.keys(searchParams ?? {}).length;
   const recipes = await filterRecipes(author, category, q);

@@ -1,8 +1,6 @@
 "use client";
 
 import BaseLink from "@/components/shared/BaseLink";
-import { useSearchParams } from "next/navigation";
-import React from "react";
 
 const ClearFilterButton = ({ filtersAmount }: { filtersAmount: number }) => (
   <div className="flex items-center gap-5">

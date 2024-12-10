@@ -3,7 +3,7 @@
 import cn from "@/utils/cn";
 import Link, { LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect } from "react";
+import React from "react";
 
 type Props = {
   href: string;

@@ -1,7 +1,7 @@
+import RecipeContent from "@/components/RecipeContent";
 import { SITE_TITLE } from "@/constants";
 import { getRecipe } from "@lib/recipes";
 import { Metadata, ResolvingMetadata } from "next";
-import RecipeContent from "../../../components/RecipeContent";
 
 export async function generateMetadata(
   props: Props,

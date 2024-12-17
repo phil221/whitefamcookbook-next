@@ -25,8 +25,6 @@ const SiteHeader = () => {
           </Link>
         </div>
         <div className="hidden lg:flex lg:gap-x-4 align-center">
-          <BaseLink href={"/recipes"} text="Recipes" />
-          <div className="w-px my-auto h-5 bg-gray-900" />
           <BaseLink href={"/authors"} text="Authors" />
           <div className="w-px my-auto h-5 bg-gray-900" />
           <BaseLink href={"/categories"} text="Categories" />

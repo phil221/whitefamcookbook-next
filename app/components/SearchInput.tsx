@@ -1,9 +1,8 @@
 "use client";
 
 import useIsFirstRender from "@/utils/useIsFirstRender";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 
 const SearchInput = () => {
   const searchParams = useSearchParams();
@@ -19,14 +18,16 @@ const SearchInput = () => {
   useEffect(() => {
     if (searchValue.length === 0 && !isFirstRender) {
       params.delete("q");
-      router.push(`/recipes?${params.toString()}`);
+      router.push(`?${params.toString()}`);
     }
   }, [isFirstRender, params, router, searchValue]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (searchValue.length > 0) params.set("q", searchValue);
-      router.push(`/recipes?${params.toString()}`);
+      if (searchValue) {
+        params.set("q", searchValue);
+        router.push(`?${params.toString()}`);
+      }
     }, 200);
 
     return () => clearTimeout(timer);
@@ -36,9 +37,10 @@ const SearchInput = () => {
     <div className="flex gap-3">
       <input
         onChange={(e) => setSearchValue(e.target.value)}
-        className="border-[0.25px] border-gray-950 rounded-md p-1 w-6/12"
+        className="text-bold bg-beige-200 border-solid border-[0.25px] border-gray-900 p-2 w-6/12 placeholder:italic placeholder:text-[#2E4B32]"
         value={searchValue}
         type="text"
+        placeholder="Search recipes..."
       />
     </div>
   );

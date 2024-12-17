@@ -1,11 +1,11 @@
 "use client";
 
 import { getPairs } from "@/utils/getPairs";
-import PDFDownloadButton from "./PDFDownloadButton";
 import { composePathFromString } from "@/utils/path";
 import type { Recipe } from "@lib/recipes";
 import Link from "next/link";
 import { usePDF } from "react-to-pdf";
+import PDFDownloadButton from "./PDFDownloadButton";
 import BaseLink from "./shared/BaseLink";
 
 const RecipeContent = ({ recipe }: { recipe: Recipe }) => {
@@ -90,7 +90,7 @@ const RecipeContent = ({ recipe }: { recipe: Recipe }) => {
       <div className="section nutrition-facts">
         <p>{nutritionFacts}</p>
       </div>
-      <BaseLink href="/recipes" text="Back to recipes" />
+      <BaseLink href="/" text="Back to recipes" />
     </div>
   );
 };

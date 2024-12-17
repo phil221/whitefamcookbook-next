@@ -1,6 +1,6 @@
-import { Prisma } from ".prisma/client";
-import prisma from "./prisma";
 import { capitalize } from "@/utils/capitalize";
+import { Prisma } from "@prisma/client";
+import prisma from "./prisma";
 
 export async function getRecipes() {
   try {
@@ -10,6 +10,7 @@ export async function getRecipes() {
         category: true,
       },
     });
+
     return recipes;
   } catch (error) {
     console.error("getRecipes error:", error);
@@ -109,15 +110,16 @@ function composeFilter(
   type: "authors" | "categories" | "q"
 ) {
   if (!filter) return {};
-  if (type === "q") return { name: { contains: filter as string, mode: "insensitive" } };
+  if (type === "q")
+    return { name: { contains: filter as string, mode: "insensitive" } };
   const filterName = type === "authors" ? "authorName" : "categoryName";
   return typeof filter === "string"
     ? { [filterName]: { equals: capitalize(filter) } }
     : {
-      OR: [
-        ...filter.map((f) => ({
-          [filterName]: { equals: capitalize(f) },
-        })),
-      ],
-    };
+        OR: [
+          ...filter.map((f) => ({
+            [filterName]: { equals: capitalize(f) },
+          })),
+        ],
+      };
 }
